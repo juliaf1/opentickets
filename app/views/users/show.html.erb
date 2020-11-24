@@ -5,11 +5,17 @@
 
     <div class="card-title">
       <h2><%= @user.first_name %> <%= @user.last_name %></h2>
+      <div class="card-tag">
+        <% @user.skills.each do |skill| %>
+        <%= '  ' + skill.name %>
+        <% end %>
+      </div>
     </div>
 
       <p class="card-description">
       <%= @user.email %> <br>
-      <%= @user.hourly_rate %>$ per hour
+      <%= @user.hourly_rate %>$ per hour <br>
+
       </p>
 
 
