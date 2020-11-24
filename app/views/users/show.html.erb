@@ -3,4 +3,10 @@
 
 <h2>Name: <%= @user.first_name %> <%= @user.last_name %></h2>
 <h2>Email: <%= @user.email %></h2>
-<h3>Hourly Rate: $<%= @user.hourly_rate %></h3>
+<h2>Hourly Rate: $<%= @user.hourly_rate %></h2>
+
+<ul><% current_user.timeslots.each do |timeslot| %>
+  <li><%= timeslot.start_time %><%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %></li>
+<% end %>
+</ul>
+<%= link_to 'add a timeslot', new_timeslot_path %>

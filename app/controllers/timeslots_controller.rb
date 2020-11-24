@@ -15,7 +15,9 @@ class TimeslotsController < ApplicationController
   end
 
   def destroy
-    
+    @timeslot = Timeslot.find(params[:id])
+    @timeslot.destroy
+    redirect_to current_user
   end
 
   private
