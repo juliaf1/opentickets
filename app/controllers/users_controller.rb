@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     if @user.update
       redirect_to user_path(@user)
     else
-      render 'new'
+      render :edit
     end
   end
 
