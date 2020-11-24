@@ -1,0 +1,12 @@
+<div class="container my-5">
+  <br>
+  <br>
+  <br>
+  <br>
+  <%= simple_form_for @timeslot, url: timeslots_path, method: 'post' do |f| %>
+
+    <%= f.input :start_time %>
+
+    <%= f.button :submit, 'Add timeslot', class: 'btn btn-primary' %>
+  <% end %>
+</div>
