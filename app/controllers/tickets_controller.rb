@@ -1,11 +1,11 @@
 class TicketsController < ApplicationController
 
   before_action :find_teacher, only: [ :create ]
-  before_action :find_timeslot, only: [ :new, :create, :destroy ]
+  before_action :find_timeslot, only: [ :new, :create ]
 
   def index
-    # @tickets = Ticket.all
-    # @tickets.where(user_id: current_user.id) || @tickets.where(timeslot_id: )
+    @student_tickets = Ticket.where(user_id: params[:user_id])
+    @teacher_tickets = Ticket.joins(:timeslot).where(timeslots: {user_id: params[:user_id]})
   end
 
   def new
@@ -24,6 +24,9 @@ class TicketsController < ApplicationController
   end
 
   def destroy
+    @ticket = Ticket.find(params[:id])
+    @ticket.destroy
+    redirect_to user_tickets_path(current_user)
   end
 
   private

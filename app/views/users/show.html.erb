@@ -19,11 +19,11 @@
 
 
       <% if current_user == @user %>
-      <%= link_to 'Add Skill', new_user_skill_path, class: 'btn btn-primary' %>
-      <!-- THE EDIT PROFILE LINK IS LINKING TO THE DEFAULT EDIT USER REGISTRATION, THIS SHOULD BE CHANGED TO EDIT USER PATH ONCE THE EDIT HTML IS CREATED-->
-      <%= link_to 'Edit profile', edit_user_registration_path, class: 'btn btn-primary' %>
-      <%= link_to 'add a timeslot', new_timeslot_path, class: 'btn btn-primary' %>
-      <!-- DEPENDENT ON TICKETS ROUTE AND VIEW TO ADD THE LINK link_to 'Book a Ticket' -->
+        <%= link_to 'Add Skill', new_user_skill_path, class: 'btn btn-primary' %>
+        <!-- THE EDIT PROFILE LINK IS LINKING TO THE DEFAULT EDIT USER REGISTRATION, THIS SHOULD BE CHANGED TO EDIT USER PATH ONCE THE EDIT HTML IS CREATED-->
+        <%= link_to 'Edit profile', edit_user_registration_path, class: 'btn btn-primary' %>
+        <%= link_to 'add a timeslot', new_timeslot_path, class: 'btn btn-primary' %>
+        <!-- DEPENDENT ON TICKETS ROUTE AND VIEW TO ADD THE LINK link_to 'Book a Ticket' -->
       <% end %>
 
 

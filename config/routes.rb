@@ -15,8 +15,10 @@ Rails.application.routes.draw do
   resources :user_skills, only: [ :new, :create, :destroy ]
 
   resources :timeslots, only: [ :new, :create, :destroy ] do
-    resources :tickets, only: [ :new, :create, :destroy ]
+    resources :tickets, only: [ :new, :create ]
   end
+
+  resources :tickets, only: :destroy
   
 
   root to: 'pages#home'
