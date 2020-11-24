@@ -1,7 +1,29 @@
 <h1>List of all Teachers</h1>
 
-<% @users.select { |user| user.hourly_rate.present? }.each do |user| %>
-  <li><%= user.first_name %> <%= user.last_name %></li>
-  <li>Hourly Rate = $<%= user.hourly_rate %></li>
-  <h3><%= link_to 'learn more', user_path(user) %></h3>
-<% end %>
+
+<div class="cards-container d-flex flex-wrap w-100">
+  <% @users.select { |user| user.hourly_rate.present? }.each do |user| %>
+  <div class="card-user d-flex my-3 mx-2">
+    <div class="card p-3 my-1">
+      <div class="card-title text-center">
+        <li><%= user.first_name %> <%= user.last_name %></li>
+      </div>
+
+      <p class="card-description">
+        <li>$<%= user.hourly_rate %> per hour</li>
+        <li><% user.skills[0..2].each do |skill| %>
+              <%= skill.name + ','%>
+              <% end %>
+              <% if user.skills.length > 3 %>
+                <%= '...' %>
+                <% end %>
+        </li>
+      </p>
+        <h3><%= link_to 'learn more', user_path(user) %></h3>
+      </div>
+
+
+        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-square my-3" %>
+    </div>
+  <% end %>
+</div>
