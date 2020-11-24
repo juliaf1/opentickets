@@ -6,30 +6,35 @@
     <div class="card-title">
       <h2><%= @user.first_name %> <%= @user.last_name %></h2>
       <div class="card-tag">
-        <% @user.skills.each do |skill| %>
-        <%= '  ' + skill.name %>
+        <% @user_skills.each do |user_skill| %>
+          <ul class="list-skills">
+            <li> <%=user_skill.skill.name %> <%= link_to 'X', user_skill_path(user_skill), method: 'delete'%> </li>
+          </ul>
         <% end %>
       </div>
     </div>
 
       <p class="card-description">
-      <%= @user.email %> <br>
-      <%= @user.hourly_rate %>$ per hour <br>
+        <ul>
+          <li> <%= @user.bio %></li>
+          <li> <%= @user.email %> </li>
+          <li> <%= @user.hourly_rate %>$ per hour</li>
+        </ul>
       </p>
 
 
       <% if current_user == @user %>
-      <%= link_to 'Add Skill', new_user_skill_path, class: 'btn btn-primary' %>
-      <!-- THE EDIT PROFILE LINK IS LINKING TO THE DEFAULT EDIT USER REGISTRATION, THIS SHOULD BE CHANGED TO EDIT USER PATH ONCE THE EDIT HTML IS CREATED-->
-      <%= link_to 'Edit profile', edit_user_registration_path, class: 'btn btn-primary' %>
-      <%= link_to 'add a timeslot', new_timeslot_path, class: 'btn btn-primary' %>
-      <!-- DEPENDENT ON TICKETS ROUTE AND VIEW TO ADD THE LINK link_to 'Book a Ticket' -->
+        <%= link_to 'Add Skill', new_user_skill_path, class: 'btn btn-primary' %>
+        <%= link_to 'Edit profile', edit_user_path, class: 'btn btn-primary' %>
+        <%= link_to 'Edit settings', edit_user_registration_path, class: 'btn btn-primary' %>
+        <%= link_to 'add a timeslot', new_timeslot_path, class: 'btn btn-primary' %>
       <% end %>
 
 
   <div class="card-user-timeslots row">
     <div class="timeslot">
       <ul><% @user.timeslots.each do |timeslot| %>
+        <!-- DEPENDENT ON TICKETS ROUTE AND VIEW TO ADD THE LINK link_to 'Book a Ticket' -->
         <li><%= timeslot.start_time %><%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %></li>
       <% end %>
       </ul>
