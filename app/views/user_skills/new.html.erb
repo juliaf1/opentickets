@@ -1,0 +1,14 @@
+<div class="container my-5">
+  <br>
+  <br>
+  <br>
+  <br>
+  <%= simple_form_for current_user, url: user_skills_path, method: 'post' do |f| %>
+
+    <%= f.association :skills, input_html: {class:'multiple-select form-control'}, include_hidden: false %>
+
+    <%= f.button :submit, 'Add skill', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<%= link_to 'Skip', current_user, class: 'btn btn-primary' %>
