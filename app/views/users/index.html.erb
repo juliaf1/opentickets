@@ -1,5 +1,7 @@
-<h1>User Index Page</h1>
+<h1>List of all Teachers</h1>
 
-<% @users.each do |user| %>
+<% @users.select { |user| user.hourly_rate.present? }.each do |user| %>
   <li><%= user.first_name %> <%= user.last_name %></li>
+  <li>Hourly Rate = $<%= user.hourly_rate %></li>
+  <h3><%= link_to 'learn more', user_path(user) %></h3>
 <% end %>
