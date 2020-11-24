@@ -15,7 +15,6 @@
       <p class="card-description">
       <%= @user.email %> <br>
       <%= @user.hourly_rate %>$ per hour <br>
-
       </p>
 
 
@@ -30,7 +29,7 @@
 
   <div class="card-user-timeslots row">
     <div class="timeslot">
-      <ul><% current_user.timeslots.each do |timeslot| %>
+      <ul><% @user.timeslots.each do |timeslot| %>
         <li><%= timeslot.start_time %><%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %></li>
       <% end %>
       </ul>
