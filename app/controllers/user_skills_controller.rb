@@ -1,22 +1,21 @@
 class UserSkillsController < ApplicationController
-  before_action
 
   def new
     @skills = Skill.all
-    @user_skill = UserSkill.new
   end
 
   def create
-    @user_skill = UserSkill.new(skills_params)
-  end
-
-  def update
+    if current_user.update(skills_params)
+      redirect_to current_user
+    else
+      render :new
+    end
   end
 
   def destroy
-    @user_skill.destroy
+    # @user_skill.destroy
 
-    redirect_to user_path(current_user)
+    # redirect_to current_user
   end
 
   private
@@ -26,7 +25,7 @@ class UserSkillsController < ApplicationController
   end
 
   def skills_params
-    params.require(:user_skills).permit(skill_id: [])
+    params.require(:user).permit(skill_ids: [])
   end
 
 end
