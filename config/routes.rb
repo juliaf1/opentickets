@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
 
-  resources :users, only: [ :index, :show, :edit, :update ]
+  resources :users, only: [ :index, :show, :edit, :update ] do
+    resources :tickets, only: [ :index ]
+  end
+
+
+
   # get '/users', to: 'users#index'
   # get '/users/:id', to: 'users#show'
   # get '/users/:id/edit', to: 'users#edit'
@@ -9,7 +14,10 @@ Rails.application.routes.draw do
 
   resources :user_skills, only: [ :new, :create, :destroy ]
 
-  resources :timeslots, only: [ :new, :create, :destroy ]
+  resources :timeslots, only: [ :new, :create, :destroy ] do
+    resources :tickets, only: [ :new, :create, :destroy ]
+  end
+  
 
   root to: 'pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

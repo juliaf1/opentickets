@@ -30,7 +30,12 @@
   <div class="card-user-timeslots row">
     <div class="timeslot">
       <ul><% @user.timeslots.each do |timeslot| %>
-        <li><%= timeslot.start_time %><%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %></li>
+        <% unless timeslot.ticket %>
+          <li>
+            <%= timeslot.start_time %><%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %>
+            <%= link_to 'book this slot', new_timeslot_ticket_path(timeslot), class: 'btn btn-sm btn-dark' %>
+          </li>
+        <% end %>
       <% end %>
       </ul>
     </div>

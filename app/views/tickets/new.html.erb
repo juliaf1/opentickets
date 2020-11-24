@@ -1,0 +1,12 @@
+<div class="container my-5">
+  <br>
+  <br>
+  <br>
+  <br>
+  <%= simple_form_for @ticket, url: timeslot_tickets_path(@timeslot), method: 'post' do |f| %>
+
+    <%= f.input :description %>
+
+    <%= f.button :submit, 'Create Ticket', class: 'btn btn-primary' %>
+  <% end %>
+</div>
