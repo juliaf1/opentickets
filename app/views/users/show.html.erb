@@ -15,7 +15,6 @@
       <p class="card-description">
       <%= @user.email %> <br>
       <%= @user.hourly_rate %>$ per hour <br>
-
       </p>
 
 
@@ -23,16 +22,17 @@
       <%= link_to 'Add Skill', new_user_skill_path, class: 'btn btn-primary' %>
       <!-- THE EDIT PROFILE LINK IS LINKING TO THE DEFAULT EDIT USER REGISTRATION, THIS SHOULD BE CHANGED TO EDIT USER PATH ONCE THE EDIT HTML IS CREATED-->
       <%= link_to 'Edit profile', edit_user_registration_path, class: 'btn btn-primary' %>
-
+      <%= link_to 'add a timeslot', new_timeslot_path, class: 'btn btn-primary' %>
       <!-- DEPENDENT ON TICKETS ROUTE AND VIEW TO ADD THE LINK link_to 'Book a Ticket' -->
       <% end %>
 
 
   <div class="card-user-timeslots row">
     <div class="timeslot">
-
+      <ul><% @user.timeslots.each do |timeslot| %>
+        <li><%= timeslot.start_time %><%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %></li>
+      <% end %>
+      </ul>
     </div>
   </div>
-
 </div>
-
