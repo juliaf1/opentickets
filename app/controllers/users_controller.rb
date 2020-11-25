@@ -3,11 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    # @filtered_teachers = User.where(first_name: params[:search])
-    # @filtered_teachers = User.joins(:timeslot).where('start_time > ?', DateTime.now)
-    # Timeslot.where('start_time > ?', params[:search])
     filtered_timeslots = Timeslot.where('start_time BETWEEN ? AND ?', params[:beginning], params[:end])
-    # filtered_timeslots = Timeslot.where('start_time > ?', params[:beginning])
     available_filtered_timeslots = filtered_timeslots.reject do |timeslot|
       timeslot.ticket
     end
@@ -40,6 +36,10 @@ class UsersController < ApplicationController
   end
 
   def user_params
+<<<<<<< HEAD
     params.require(:user).permit(:first_name, :last_name, :email, :bio, :hourly_rate, :beginning, :end)
+=======
+    params.require(:user).permit(:first_name, :last_name, :email, :bio, :photo, :hourly_rate, :beginning, :end)
+>>>>>>> 6283706d64d4556a26213ef8ee7309f93f777b1c
   end
 end
