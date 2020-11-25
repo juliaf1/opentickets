@@ -1,29 +1,86 @@
-<h1>List of all Teachers</h1>
+<br>
+<br>
+<br>
 
+<h4>Filter by time period</h4>
+<%= form_tag(users_path, method: :get) do %>
+  <%= text_field_tag(:beginning, params[:beginning]) %>
+  <%= text_field_tag(:end, params[:end]) %>
+  <%= submit_tag ("Submit") %>
+<% end %>
 
-<div class="cards-container d-flex flex-wrap w-100">
-  <% @users.select { |user| user.hourly_rate.present? }.each do |user| %>
-  <div class="card-user d-flex my-3 mx-2">
-    <div class="card p-3 my-1">
-      <div class="card-title text-center">
-        <li><%= user.first_name %> <%= user.last_name %></li>
-      </div>
+<% unless @filtered_teachers.empty? %>
+  <h4>Filtered Teachers</h4>
 
-      <p class="card-description">
-        <li>$<%= user.hourly_rate %> per hour</li>
-        <li><% user.skills[0..2].each do |skill| %>
-              <%= skill.name + ','%>
+  <div class="cards-container d-flex flex-wrap w-100">
+    <% @filtered_teachers.each do |user| %>
+      <div class="card-user d-flex my-3 mx-2">
+        
+        <div class="card p-3 my-1">
+          <div class="card-title text-center">
+            <li><%= user.first_name %> <%= user.last_name %></li>
+          </div>
+
+          <ul class="card-description">
+            <li>$<%= user.hourly_rate %> per hour</li>
+            <li>
+              <% user.skills[0..2].each do |skill| %>
+                <%= skill.name + ','%>
               <% end %>
               <% if user.skills.length > 3 %>
                 <%= '...' %>
-                <% end %>
-        </li>
-      </p>
-        <h3><%= link_to 'learn more', user_path(user) %></h3>
+              <% end %>
+            </li>
+          </ul>
+          
+          <p><%= link_to 'learn more', user_path(user) %></p>
+        </div>
+        
+        <% if user.photo.attached? %>
+          <%= cl_image_tag user.photo.key, crop: :fill, class: "avatar-square my-3" %>
+        <% else %>
+          <%= image_tag "https://instastatistics.com/images/default_avatar.jpg", class: "avatar-square my-3" %>
+        <% end %>
+        
       </div>
+    <% end %>
+  </div>
+<% end %>
 
+<% if @filtered_teachers.empty? %>
+  <h4>All Teachers</h4>  
+  
+  <div class="cards-container d-flex flex-wrap w-100">
+    <% @users.select { |user| user.hourly_rate.present? }.each do |user| %>
+      <div class="card-user d-flex my-3 mx-2">
 
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-square my-3" %>
-    </div>
-  <% end %>
-</div>
+        <div class="card p-3 my-1">
+          <div class="card-title text-center">
+            <li><%= user.first_name %> <%= user.last_name %></li>
+          </div>
+
+          <ul class="card-description">
+            <li>$<%= user.hourly_rate %> per hour</li>
+            <li>
+              <% user.skills[0..2].each do |skill| %>
+                <%= skill.name + ','%>
+              <% end %>
+              <% if user.skills.length > 3 %>
+                <%= '...' %>
+              <% end %>
+            </li>
+          </ul>
+          
+          <p><%= link_to 'learn more', user_path(user) %></p>
+        </div>
+        
+        <% if user.photo.attached? %>
+          <%= cl_image_tag user.photo.key, crop: :fill, class: "avatar-square my-3" %>
+        <% else %>
+          <%= image_tag "https://instastatistics.com/images/default_avatar.jpg", class: "avatar-square my-3" %>
+        <% end %>
+        
+      </div>
+    <% end %>
+  </div>
+<% end %>
