@@ -1,8 +1,7 @@
 class TimeslotsController < ApplicationController
-
   def new
     @timeslot = Timeslot.new
-    authorize @timeslot
+    authorize current_user
   end
 
   def create
@@ -25,7 +24,7 @@ class TimeslotsController < ApplicationController
     authorize @timeslot
 
     @timeslot.destroy
-    redirect_to user_path
+    redirect_to user_path(current_user)
   end
 
   private
@@ -33,5 +32,4 @@ class TimeslotsController < ApplicationController
   def timeslot_params
     params.require(:timeslot).permit(:start_time)
   end
-
 end

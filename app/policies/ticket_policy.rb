@@ -1,15 +1,14 @@
 class TicketPolicy < ApplicationPolicy
-
-  def new
-    create?
+  def new?
+    true
   end
 
   def create?
-    !owner?
+    record.timeslot.user != user
   end
 
   def destroy?
-    owner?
+    owner? || record.timeslot.user == user
   end
 
   def owner?

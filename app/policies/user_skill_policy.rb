@@ -1,11 +1,6 @@
 class UserSkillPolicy < ApplicationPolicy
-
   def new?
     create?
-  end
-
-  def show?
-    true
   end
 
   def create?
@@ -20,8 +15,12 @@ class UserSkillPolicy < ApplicationPolicy
     owner?
   end
 
-  def owner?
+  def destroy?
     record.user == user
+  end
+
+  def owner?
+    record == user
   end
 
   class Scope < Scope

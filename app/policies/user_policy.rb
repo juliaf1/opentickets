@@ -1,5 +1,4 @@
 class UserPolicy < ApplicationPolicy
-
   def index?
     true
   end
@@ -17,19 +16,19 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit
-    false
+    update?
   end
 
   def update?
     owner?
   end
 
-  def destroy
+  def destroy?
     owner?
   end
 
   def owner?
-    record.user == user
+    record == user
   end
 
   class Scope < Scope

@@ -1,16 +1,14 @@
 class TicketsController < ApplicationController
-
-  before_action :find_teacher, only: [ :create ]
-  before_action :find_timeslot, only: [ :new, :create ]
+  before_action :find_teacher, only: [:create]
+  before_action :find_timeslot, only: [:new, :create]
 
   def index
     @student_tickets = Ticket.where(user_id: params[:user_id])
-    @teacher_tickets = Ticket.joins(:timeslot).where(timeslots: {user_id: params[:user_id]})
+    @teacher_tickets = Ticket.joins(:timeslot).where(timeslots: { user_id: params[:user_id] })
   end
 
   def new
     @ticket = Ticket.new
-
     authorize @ticket
   end
 
@@ -18,14 +16,13 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(ticket_params)
     @ticket.user = current_user
     @ticket.timeslot = @timeslot
-
     authorize @ticket
     respond_to do |format|
       if @ticket.save
-        format.html { redirect_to @ticket, notice: 'Your ticket was created successfully' }
+        format.html { redirect_to user_tickets_path(current_user), notice: 'Your ticket was created successfully' }
         format.json { render :show, status: :created, location: @ticket }
       else
-        format.html { redirect_to user_path(@teacher) }
+        format.html { redirect_to user_path(@timeslot.user_id) }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
     end
@@ -33,8 +30,13 @@ class TicketsController < ApplicationController
 
   def destroy
     @ticket = Ticket.find(params[:id])
-    @ticket.destroy
-    redirect_to user_tickets_path(current_user)
+    authorize @ticket
+    if @ticket.timeslot.start_time - Time.now > 86_400
+      @ticket.destroy
+      redirect_to user_tickets_path(current_user), notice: 'Your ticket was canceled 😞'
+    else
+      redirect_to user_tickets_path(current_user), alert: "You can't cancel a Ticket with less than 24h notice!"
+    end
   end
 
   private

@@ -1,13 +1,13 @@
 class UserSkillsController < ApplicationController
-  before_action :find_user_skill, only: :destroy
+  before_action :find_user_skill, only: [:destroy]
 
   def new
     @skills = Skill.all
-    authorize @user_skill
+    authorize current_user
   end
 
   def create
-    authorize @user_skill
+    authorize current_user
     if current_user.update(skills_params)
       redirect_to current_user
     else

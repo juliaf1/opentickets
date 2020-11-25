@@ -1,5 +1,4 @@
 class TimeslotPolicy < ApplicationPolicy
-
   def new?
     create?
   end
