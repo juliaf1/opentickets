@@ -10,16 +10,24 @@ class TicketsController < ApplicationController
 
   def new
     @ticket = Ticket.new
+
+    authorize @ticket
   end
 
   def create
     @ticket = Ticket.new(ticket_params)
     @ticket.user = current_user
     @ticket.timeslot = @timeslot
-    if @ticket.save
-      redirect_to user_tickets_path(current_user)
-    else
-      redirect_to user_path(@teacher)
+
+    authorize @ticket
+    respond_to do |format|
+      if @ticket.save
+        format.html { redirect_to @ticket, notice: 'Your ticket was created successfully' }
+        format.json { render :show, status: :created, location: @ticket }
+      else
+        format.html { redirect_to user_path(@teacher) }
+        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+      end
     end
   end
 
