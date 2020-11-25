@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :skills, through: :user_skills
   has_many :tickets, through: :timeslots
   has_many :reviews, through: :tickets
+  has_one_attached :photo
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   def show
     @user_skills = @user.user_skills.includes(:skill)
-    @reviews = current_user.reviews
+    @reviews = @user.reviews
   end
 
   def edit
@@ -40,6 +40,10 @@ class UsersController < ApplicationController
   end
 
   def user_params
+<<<<<<< HEAD
     params.require(:user).permit(:first_name, :last_name, :email, :bio, :hourly_rate, :beginning, :end)
+=======
+    params.require(:user).permit(:first_name, :last_name, :email, :bio, :photo, :hourly_rate)
+>>>>>>> master
   end
 end
