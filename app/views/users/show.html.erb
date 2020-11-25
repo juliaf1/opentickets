@@ -1,5 +1,9 @@
 <div class="container my-5 p-5">
-  <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-square my-1" %>
+  <% if @user.photo.attached? %>
+    <%= cl_image_tag @user.photo.key, crop: :fill, class: "avatar-square my-1" %>
+  <% else %>
+    <%= image_tag "https://instastatistics.com/images/default_avatar.jpg", class: "avatar-square my-1" %>
+  <% end %>
 
   <div class="card p-3">
 
