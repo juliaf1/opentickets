@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user_skills = @user.user_skills.includes(:skill)
   end
 
   def edit
