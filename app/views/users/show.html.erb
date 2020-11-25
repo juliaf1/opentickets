@@ -2,7 +2,7 @@
   <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-square my-1" %>
 
   <div class="card p-3">
-    
+
     <div class="card-title">
       <h2><%= @user.first_name %> <%= @user.last_name %></h2>
       <div class="card-tag">
@@ -26,7 +26,7 @@
       <%= link_to 'Add Skill', new_user_skill_path, class: 'btn btn-primary' %>
       <%= link_to 'Edit profile', edit_user_path, class: 'btn btn-primary' %>
       <%= link_to 'Edit settings', edit_user_registration_path, class: 'btn btn-primary' %>
-      <%= link_to 'add a timeslot', new_timeslot_path, class: 'btn btn-primary' %>
+      <%= link_to 'Add a timeslot', new_timeslot_path, class: 'btn btn-primary' %>
     <% end %>
 
     <div class="card-user-timeslots row">
@@ -43,4 +43,17 @@
         </ul>
       </div>
     </div>
+
+    <% if @user.reviews %>
+      <div class="reviews">
+        <ul>
+          <% @user.reviews.each do |review| %>
+            <li>
+              <%= review.content %>
+              <%= review.rating %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 </div>

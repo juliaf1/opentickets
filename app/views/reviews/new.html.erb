@@ -1,0 +1,13 @@
+<div class="container my-5">
+  <br>
+  <br>
+  <br>
+  <br>
+  <%= simple_form_for @review, url: ticket_reviews_path(@ticket), method: 'post' do |f| %>
+
+    <%= f.input :content %>
+    <%= f.input :rating %>
+
+    <%= f.button :submit, 'Add Review', class: 'btn btn-primary' %>
+  <% end %>
+</div>
