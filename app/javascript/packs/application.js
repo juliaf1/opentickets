@@ -27,9 +27,12 @@ document.addEventListener('turbolinks:load', () => {
   flatpickr(".datepicker", {
     altInput: true,
     allowInput: true,
-    enableTime: true
+    enableTime: true,
+    // minDate: Date.today
   });
+
   flatpickr("#range_start", {
+    enableTime: true,
     altInput: true,
     plugins: [new rangePlugin({ input: "#range_end"})]
   });

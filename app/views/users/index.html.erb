@@ -3,11 +3,19 @@
 <br>
 
 <h4>Filter by time period</h4>
-<%= form_tag(users_path, method: :get) do %>
-  <%= text_field_tag(:beginning, params[:beginning]) %>
-  <%= text_field_tag(:end, params[:end]) %>
-  <%= submit_tag ("Submit") %>
-<% end %>
+
+
+<div class="container">
+  <div class="form-wrapper" style="width: 400px; margin: 0 auto;">
+    <h4>Filter by time period</h4>
+
+    <%= simple_form_for :search, method: "get" do |f| %>
+      <%= f.input :beginning, as: :string, input_html: {id: "range_start",  name: 'beginning' } %>
+      <%= f.input :end, as: :string, input_html: {id: "range_end",  name: 'end' } %>
+      <%= submit_tag ("Submit") %>
+    <% end %>
+  </div>
+</div>
 
 <% unless @filtered_teachers.empty? %>
   <h4>Filtered Teachers</h4>
@@ -23,19 +31,6 @@
 
           <ul class="card-description">
             <li>$<%= user.hourly_rate %> per hour</li>
-<<<<<<< HEAD
-            <li><% user.skills[0..2].each do |skill| %>
-              <%= skill.name + ','%>
-            <% end %>
-            <% if user.skills.length > 3 %>
-              <%= '...' %>
-            <% end %>
-            </li>
-          </p>
-          <h3><%= link_to 'learn more', user_path(user) %></h3>
-          </div>
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-square my-3" %>
-=======
             <li>
               <% user.skills[0..2].each do |skill| %>
                 <%= skill.name + ','%>
@@ -55,7 +50,6 @@
           <%= image_tag "https://instastatistics.com/images/default_avatar.jpg", class: "avatar-square my-3" %>
         <% end %>
         
->>>>>>> 6283706d64d4556a26213ef8ee7309f93f777b1c
       </div>
     <% end %>
   </div>
@@ -87,9 +81,6 @@
           
           <p><%= link_to 'learn more', user_path(user) %></p>
         </div>
-<<<<<<< HEAD
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-square my-3" %>
-=======
         
         <% if user.photo.attached? %>
           <%= cl_image_tag user.photo.key, crop: :fill, class: "avatar-square my-3" %>
@@ -97,7 +88,6 @@
           <%= image_tag "https://instastatistics.com/images/default_avatar.jpg", class: "avatar-square my-3" %>
         <% end %>
         
->>>>>>> 6283706d64d4556a26213ef8ee7309f93f777b1c
       </div>
     <% end %>
   </div>
