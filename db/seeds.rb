@@ -7,23 +7,19 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # create Matheus
-puts '********** Deleting User Skills, Skills and Users **********'
-UserSkill.destroy_all
-Skill.destroy_all
-User.destroy_all
 
-puts '********** Seeding some new skills **********'
+puts 'Creating some new skills **********'
 skills = %w(Ruby HTML CSS Rails JavaScript Python C++ PHP)
 
 skills.each do |skill| 
   Skill.create(name: skill)
   puts "#{skill} created as a skill"
 end
-puts '********** Skills Seeding Complete **********'
+puts '********** Skills Seeding Complete'
 
 
 
-puts '********** Seeding some beautiful users **********'
+puts 'Creating some beautiful users **********'
 
 lewagon_teachers = []
 matheus = {
@@ -48,8 +44,8 @@ lewagon_teachers << ciro
 
 tatchi = {
   first_name: 'Tatchi',
-  last_name: 'McTatchison',
-  email: 'tmctatchison@lewagon.com',
+  last_name: 'Wiggers',
+  email: 'twiggers@lewagon.com',
   password: '123456',
   hourly_rate: 5,
   bio: "I have the coolest hair in Lewagon and there's nothing you can do about it"
@@ -91,7 +87,8 @@ lewagon_teachers.each do |teacher|
   puts "Created #{teacher[:first_name]}"
 end
 
-puts '**********User Seeding Complete**********'
+puts '********** User Seeding Complete'
+puts 'Creating some user skills **********'
 
 teachers = User.all
 skills = Skill.all
@@ -102,5 +99,70 @@ teachers.each do |teacher|
   end
 end
 
-puts '**********User Skills Seeding Complete**********'
+puts '********** User Skills Seeding Complete'
 
+puts 'Creating some students **********'
+
+students = []
+
+kenneth = {
+  first_name: 'Kenneth',
+  last_name: 'Wall',
+  email: 'kwall@lewagon.com',
+  password: '123456',
+  bio: "USA USA USA"
+}
+students << kenneth
+
+filipe = {
+  first_name: 'Filipe',
+  last_name: 'Alencar',
+  email: 'falencar@lewagon.com',
+  password: '123456',
+  bio: "JavaScript is Love"
+}
+students << filipe
+
+gabriel = {
+  first_name: 'Gabriel',
+  last_name: 'Ferro',
+  email: 'gferro@lewagon.com',
+  password: '123456',
+  bio: "Lady Gaga is my idol"
+}
+students << gabriel
+
+students.each do |student|
+  User.create(student)
+  puts "Created #{student[:first_name]}"
+end
+
+puts '********** Students Created'
+
+puts 'Creating Teacher Timeslots **********'
+
+teachers = User.all.select { |user| user.hourly_rate }
+
+teachers.each do |teacher|
+  10.times do
+    time = Time.now + rand(1..1000000)
+    Timeslot.create(user_id: teacher.id, start_time: time )
+  end
+end
+
+puts "********** #{Timeslot.count} Timeslots Created"
+
+puts 'Creating Tickets **********'
+
+students = User.all.reject { |user| user.hourly_rate }
+available_timeslots = Timeslot.all
+
+students.each do |student|
+  10.times do
+    description = "I need help with #{skills.sample.name}"
+    timeslot = available_timeslots.sample
+    Ticket.create(description: description, user: student, timeslot: timeslot)
+    available_timeslots = available_timeslots.reject { |timeslot| timeslot == Ticket.last.timeslot }
+  end
+end
+puts "********** #{Ticket.count} Tickets Created"

@@ -35,6 +35,9 @@ gem 'simple_form'
 # Devise for authentication
 gem 'devise'
 
+# Added Faker for Seeds
+gem 'faker'
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
