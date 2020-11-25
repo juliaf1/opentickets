@@ -18,9 +18,9 @@ import "../plugins/flatpickr"
 import "bootstrap";
 
 import flatpickr from 'flatpickr';
-import 'flatpickr/dist/themes/material_green';
+// import 'flatpickr/dist/themes/material_green';
 import rangePlugin from "flatpickr/dist/plugins/rangePlugin";
-import 'select2/dist/css/select2';
+// import 'select2/dist/css/select2';
 import { multipleSelect } from '../plugins/select';
 
 document.addEventListener('turbolinks:load', () => {
