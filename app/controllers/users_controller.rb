@@ -40,10 +40,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-<<<<<<< HEAD
     params.require(:user).permit(:first_name, :last_name, :email, :bio, :hourly_rate, :beginning, :end)
-=======
-    params.require(:user).permit(:first_name, :last_name, :email, :bio, :photo, :hourly_rate)
->>>>>>> master
   end
 end

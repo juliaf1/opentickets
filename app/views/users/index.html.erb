@@ -21,22 +21,20 @@
           <p class="card-description">
             <li>$<%= user.hourly_rate %> per hour</li>
             <li><% user.skills[0..2].each do |skill| %>
-                  <%= skill.name + ','%>
-                  <% end %>
-                  <% if user.skills.length > 3 %>
-                    <%= '...' %>
-                    <% end %>
+              <%= skill.name + ','%>
+            <% end %>
+            <% if user.skills.length > 3 %>
+              <%= '...' %>
+            <% end %>
             </li>
           </p>
-            <h3><%= link_to 'learn more', user_path(user) %></h3>
+          <h3><%= link_to 'learn more', user_path(user) %></h3>
           </div>
-
-
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-square my-3" %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-square my-3" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
 <% if @filtered_teachers.empty? %>
   <h4>All Teachers</h4>
