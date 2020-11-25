@@ -20,9 +20,13 @@
 
     <p class="card-description">
       <ul>
-        <li> <%= @user.bio %></li>
+        <% if @user.bio %>
+          <li> <%= @user.bio %></li>
+        <% end %>
         <li> <%= @user.email %> </li>
-        <li> <%= @user.hourly_rate %>$ per hour</li>
+        <% if @user.hourly_rate %>
+          <li> <%= @user.hourly_rate %>$ per hour</li>
+        <% end %>
       </ul>
     </p>
 
