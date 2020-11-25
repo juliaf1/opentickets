@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user_skills = @user.user_skills.includes(:skill)
-    @reviews = current_user.reviews
+    @reviews = @user.reviews
   end
 
   def edit

@@ -35,7 +35,7 @@
           <% @user.timeslots.each do |timeslot| %>
             <% unless timeslot.ticket %>
               <li>
-                <%= timeslot.start_time %><%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %>
+                <%= timeslot.start_time.strftime("%A, %d %B %Y, %H:%M") %><%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %>
                 <%= link_to 'book this slot', new_timeslot_ticket_path(timeslot), class: 'btn btn-sm btn-dark' %>
               </li>
             <% end %>
