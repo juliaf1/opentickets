@@ -19,7 +19,10 @@ Rails.application.routes.draw do
   end
 
   resources :tickets, only: :destroy
-  
+
+  resources :tickets, only: [] do
+    resources :reviews, only: [ :new, :create ]
+  end
 
   root to: 'pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

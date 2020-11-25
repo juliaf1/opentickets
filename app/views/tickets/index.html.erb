@@ -14,6 +14,7 @@
       <li>
         <%= ticket.description %> <strong>with <%= ticket.timeslot.user.first_name %></strong> at precisely <%= ticket.timeslot.start_time %>
         <%= link_to 'cancel ticket', ticket_path(ticket), method: :delete, data: {confirm: 'Are you sure you want to cancel this ticket?'}, class: 'btn btn-sm btn-dark' %>
+        <%= link_to 'add review', new_ticket_review_path(ticket), class: 'btn btn-sm btn-light' %>
       </li>
     <% end %>
   </ul>
