@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :timeslots, dependent: :destroy
   has_many :skills, through: :user_skills
   has_many :tickets, through: :timeslots
+  has_many :booked_tickets, class_name: 'Ticket', foreign_key: 'user_id', dependent: :destroy
   has_many :reviews, through: :tickets
   has_one_attached :photo
 
