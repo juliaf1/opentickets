@@ -21,7 +21,7 @@ import flatpickr from 'flatpickr';
 // import 'flatpickr/dist/flatpickr.min.css';
 import 'flatpickr/dist/themes/material_green.css';
 import rangePlugin from "flatpickr/dist/plugins/rangePlugin";
-import 'select2/dist/css/select2.css';
+// import 'select2/dist/css/select2.css';
 import { multipleSelect } from '../plugins/select.js';
 
 document.addEventListener('turbolinks:load', () => {
