@@ -1,8 +1,10 @@
+require 'open-uri'
+
 puts '*** Creating some new skills ***'
 
 skills = %w(Ruby HTML CSS Rails JavaScript Python C++ PHP)
 
-skills.each do |skill| 
+skills.each do |skill|
   Skill.create(name: skill)
   puts "#{skill} created as a skill"
 end
@@ -73,12 +75,39 @@ marcel = {
   }
 lewagon_teachers << marcel
 
+# Iterating over array of teachers hashes to create users
 lewagon_teachers.each do |teacher|
   User.create(teacher)
   puts "Created #{teacher[:first_name]}"
 end
 
+# Finding teachers instances
+matheus = User.find(1)
+matheus_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U3N8S3LFK-73039713a064-512')
+matheus.photo.attach(io: matheus_avatar, filename: 'matheus.jpeg', content_type: 'image/jpeg')
+
+ciro = User.find(2)
+ciro_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-USL030V24-5c51862252d8-512')
+ciro.photo.attach(io: ciro_avatar, filename: 'ciro.jpeg', content_type: 'image/jpeg')
+
+tatchi = User.find(3)
+tatchi_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-USJJY7ZUG-b163bf314111-512')
+tatchi.photo.attach(io: tatchi_avatar, filename: 'tatchi.jpeg', content_type: 'image/jpeg')
+
+pedro = User.find(4)
+pedro_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-US7288YNP-adabe5cee822-512')
+pedro.photo.attach(io: pedro_avatar, filename: 'pedro.jpeg', content_type: 'image/jpeg')
+
+milene = User.find(5)
+milene_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-UDE76BKKN-1936f122810b-512')
+milene.photo.attach(io: milene_avatar, filename: 'milene.jpeg', content_type: 'image/jpeg')
+
+marcel = User.find(6)
+marcel_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-UDAKDMC5U-22cee4862fb3-512')
+marcel.photo.attach(io: marcel_avatar, filename: 'marcel.jpeg', content_type: 'image/jpeg')
+
 puts '*** User Seeding Complete ***'
+
 puts '*** Creating some User Skills ***'
 
 teachers = User.all
@@ -139,6 +168,22 @@ students.each do |student|
 end
 
 puts '*** Students Created ***'
+
+kenneth = User.find(7)
+kenneth_avatar = URI.open("https://ca.slack-edge.com/T02NE0241-U01CLNSQXBN-77d374596e5f-512")
+kenneth.photo.attach(io: kenneth_avatar, filename: 'kenneth.jpeg', content_type: 'image/jpeg')
+
+filipe = User.find(8)
+filipe_avatar = URI.open("https://ca.slack-edge.com/T02NE0241-U01CELLS6G2-013b848074c6-512")
+filipe.photo.attach(io: filipe_avatar, filename: 'filipe.jpeg', content_type: 'image/jpeg')
+
+gabriel = User.find(9)
+gabriel_avatar = URI.open("https://ca.slack-edge.com/T02NE0241-U01D4HY364Q-acc38bde08a6-512")
+gabriel.photo.attach(io: gabriel_avatar, filename: 'gabriel.jpeg', content_type: 'image/jpeg')
+
+cynthia = User.find(10)
+cynthia_avatar = URI.open("https://ca.slack-edge.com/T02NE0241-U01BZSP6T1V-1ab6ccfc08af-512")
+cynthia.photo.attach(io: cynthia_avatar, filename: 'cynthia.jpeg', content_type: 'image/jpeg')
 
 puts '*** Creating Teacher Timeslots ***'
 
