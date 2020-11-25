@@ -1,8 +1,3 @@
-// This file is automatically compiled by Webpack, along with any other files
-// present in this directory. You're encouraged to place your actual application logic in
-// a relevant structure within app/javascript and only use these pack files to reference
-// that code so it'll be compiled.
-
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
@@ -15,23 +10,24 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-
-// ----------------------------------------------------
-// Note(lewagon): ABOVE IS RAILS DEFAULT CONFIGURATION
-// WRITE YOUR OWN JS STARTING FROM HERE 👇
-// ----------------------------------------------------
-
 // External imports
 import "bootstrap";
+
+import flatpickr from 'flatpickr';
+// import 'flatpickr/dist/flatpickr.min.css';
+import 'flatpickr/dist/themes/material_green.css';
+
 import 'select2/dist/css/select2.css';
 import { multipleSelect } from '../plugins/select.js';
 
 document.addEventListener('turbolinks:load', () => {
+  flatpickr(".datepicker", {
+    altInput: true,
+    allowInput: true,
+    enableTime: true
+  });
   const new_form = document.querySelector(".multiple-select");
   if (new_form) {
     multipleSelect();
   }
 });
-
-// Internal imports, e.g:
-// import { initSelect2 } from '../components/init_select2';
