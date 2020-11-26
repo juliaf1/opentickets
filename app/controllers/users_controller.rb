@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     authorize @users
 
     filtered_timeslots = Timeslot.where('start_time BETWEEN ? AND ?', params[:beginning], params[:end])
-    
+
     available_filtered_timeslots = filtered_timeslots.reject do |timeslot|
       timeslot.ticket
     end
@@ -46,6 +46,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :bio, :photo, :hourly_rate)
+    params.require(:user).permit(:first_name, :last_name, :bio, :photo)
   end
 end
