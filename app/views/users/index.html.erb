@@ -15,14 +15,19 @@
     <% end %>
   </div>
 </div>
-<div>
-  <%= simple_form_for :search, method: "get" do |f| %>
+<%= form_tag users_path, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Find a teacher"
+  %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
 
-    <%= f.input :skills, input_html: {name: 'skill', class:'multiple-select form-control'}, include_hidden: false %>
-
-    <%= f.button :submit, 'Add skill', class: 'btn btn-primary' %>
-  <% end %>
-</div>
+<h1><% @teach.each do |teacher| %>
+  <% teacher.last_name %>
+<% end %>
+</h1>
 
 <% unless @filtered_teachers.empty? %>
   <h4>Filtered Teachers</h4>

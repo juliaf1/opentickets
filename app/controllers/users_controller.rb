@@ -14,6 +14,8 @@ class UsersController < ApplicationController
       timeslot.user
     end.uniq
 
+ 
+
     # @search_skill = Skill.find_by(name: params[:skill])
     
     # @filtered_teachers.select! do |teacher|
