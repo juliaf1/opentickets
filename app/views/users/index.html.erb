@@ -2,12 +2,17 @@
 <br>
 <br>
 
-<h4>Filter by time period</h4>
-<%= form_tag(users_path, method: :get) do %>
-  <%= text_field_tag(:beginning, params[:beginning]) %>
-  <%= text_field_tag(:end, params[:end]) %>
-  <%= submit_tag ("Submit") %>
-<% end %>
+<div class="container">
+  <div class="form-wrapper" style="width: 400px; margin: 0 auto;">
+    <h4>Filter by time period</h4>
+
+    <%= simple_form_for :search, method: "get" do |f| %>
+      <%= f.input :beginning, as: :string, input_html: {id: "range_start",  name: 'beginning' } %>
+      <%= f.input :end, as: :string, input_html: {id: "range_end",  name: 'end' } %>
+      <%= submit_tag ("Submit") %>
+    <% end %>
+  </div>
+</div>
 
 <% unless @filtered_teachers.empty? %>
   <h4>Filtered Teachers</h4>
