@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    mark_map
     @user_skills = @user.user_skills.includes(:skill)
     @reviews = @user.reviews
     authorize @user
@@ -41,11 +42,21 @@ class UsersController < ApplicationController
 
   private
 
+  def mark_map
+    find_user
+    if @user.latitude && @user.longitude
+      @mark = {
+        lgn: @user.longitude,
+        lat: @user.latitude
+      }
+    end
+  end
+
   def find_user
     @user = User.find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :bio, :photo)
+    params.require(:user).permit(:first_name, :last_name, :bio, :photo, :city)
   end
 end

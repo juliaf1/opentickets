@@ -22,6 +22,8 @@ import flatpickr from 'flatpickr';
 import rangePlugin from "flatpickr/dist/plugins/rangePlugin";
 // import 'select2/dist/css/select2';
 import { multipleSelect } from '../plugins/select';
+import { initMapbox } from '../plugins/init_mapbox';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 document.addEventListener('turbolinks:load', () => {
   flatpickr(".datepicker", {
@@ -33,7 +35,7 @@ document.addEventListener('turbolinks:load', () => {
     altInput: true,
     plugins: [new rangePlugin({ input: "#range_end"})]
   });
-
+  initMapbox();
   const new_form = document.querySelector(".multiple-select");
   if (new_form) {
     multipleSelect();
