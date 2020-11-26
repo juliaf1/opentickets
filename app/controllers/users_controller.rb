@@ -12,35 +12,6 @@ class UsersController < ApplicationController
     @filtered_teachers = available_filtered_timeslots.map do |timeslot|
       timeslot.user
     end.uniq
-
-    
-
-    if params[:user] && params[:user][:skill_ids]
-      @skills = params[:user][:skill_ids].map do |skill_id|
-        Skill.find(skill_id)
-      end
-    end
-    
-    if @skills
-      @filtered_by_skills = @users.select do |teacher|
-        teacher.user_skills.any? do |user_skill|
-          @skills.include?("#{user_skill.skill.name}")
-        end
-      end
-    end
-    
-    # @fil_by_skill = @filtered_teachers.select! do |teacher|
-      # teacher.user_skills.any? do |user_skill|
-       # @skills.include?(user_skill.skill.name)
-      # end
-    # end
-    
-    # @filtered_teachers.select! do |teacher|
-      #teacher.user_skills.any? do |user_skill|
-      #  user_skill.skill == @search_skill
-      #end
-    # end
-
   end
 
   def show
