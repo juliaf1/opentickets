@@ -4,16 +4,25 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     authorize @users
-
-    filtered_timeslots = Timeslot.where('start_time BETWEEN ? AND ?', params[:beginning], params[:end])
-    
+    dates = params[:beginning].to_s.split('to')
+    dates.map { |date| DateTime.parse(date) }
+    filtered_timeslots = Timeslot.where('start_time BETWEEN ? AND ?', dates.first, dates.last )
     available_filtered_timeslots = filtered_timeslots.reject do |timeslot|
       timeslot.ticket
     end
-
     @filtered_teachers = available_filtered_timeslots.map do |timeslot|
       timeslot.user
     end.uniq
+    
+    # @filtered_teachers.select! do |teacher|
+      # teacher.user_skills.any? do |user_skill|
+        # user_skill.skill == Skill.find(7)
+      # end
+    # end
+    
+    # @skill1 = User.find(6).user_skills.any? do |user_skill|
+      # user_skill.skill == Skill.find(7)
+    # end
   end
 
   def show
