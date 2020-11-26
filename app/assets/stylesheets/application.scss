@@ -7,6 +7,9 @@
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "flatpickr/dist/themes/material_green";
+@import 'select2/dist/css/select2';
+@import 'mapbox-gl/dist/mapbox-gl';
 
 // Your CSS partials
 @import "components/index";

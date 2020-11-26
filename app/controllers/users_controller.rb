@@ -3,32 +3,60 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    authorize @users
+
+    filtered_timeslots = Timeslot.where('start_time BETWEEN ? AND ?', params[:beginning], params[:end])
+
+    available_filtered_timeslots = filtered_timeslots.reject do |timeslot|
+      timeslot.ticket
+    end
+
+    @filtered_teachers = available_filtered_timeslots.map do |timeslot|
+      timeslot.user
+    end.uniq
   end
 
   def show
+    mark_map
     @user_skills = @user.user_skills.includes(:skill)
-    @reviews = current_user.reviews
+    @reviews = @user.reviews
+    authorize @user
   end
 
   def edit
-    @user = User.new
+    authorize @user
   end
 
   def update
-    if current_user.update(user_params)
-      redirect_to user_path(current_user)
-    else
-      render :edit
+    authorize @user
+    respond_to do |format|
+      if current_user.update(user_params)
+        format.html { redirect_to @user, notice: 'Your update was successfull!' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   private
+
+  def mark_map
+    find_user
+    if @user.latitude && @user.longitude
+      @mark = {
+        lgn: @user.longitude,
+        lat: @user.latitude
+      }
+    end
+  end
 
   def find_user
     @user = User.find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :bio, :hourly_rate)
+    params.require(:user).permit(:first_name, :last_name, :bio, :photo, :city)
   end
 end

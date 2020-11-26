@@ -1,11 +1,15 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  has_many :user_skills
-  has_many :timeslots
+  geocoded_by :city
+  after_validation :geocode, if: :will_save_change_to_city?
+  has_many :user_skills, dependent: :destroy
+  has_many :timeslots, dependent: :destroy
   has_many :skills, through: :user_skills
   has_many :tickets, through: :timeslots
+  has_many :booked_tickets, class_name: 'Ticket', foreign_key: 'user_id', dependent: :destroy
   has_many :reviews, through: :tickets
+  has_one_attached :photo
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
