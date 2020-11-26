@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     authorize @users
 
     filtered_timeslots = Timeslot.where('start_time BETWEEN ? AND ?', params[:beginning], params[:end])
-    
+
     available_filtered_timeslots = filtered_timeslots.reject do |timeslot|
       timeslot.ticket
     end
@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    mark_map
     @user_skills = @user.user_skills.includes(:skill)
     @reviews = @user.reviews
     authorize @user
@@ -40,6 +41,16 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def mark_map
+    find_user
+    if @user.latitude && @user.longitude
+      @mark = {
+        lgn: @user.longitude,
+        lat: @user.latitude
+      }
+    end
+  end
 
   def find_user
     @user = User.find(params[:id])
