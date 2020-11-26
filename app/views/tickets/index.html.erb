@@ -1,35 +1,77 @@
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h1>Your Tickets</h1>
+<div class="container tickets-container text-center border px-2">
 
-<% unless @student_tickets.first.nil? %>
-  <h2>Tickets as a student</h2>
-  <ul>
-    <% @student_tickets.each do |ticket| %>
-      <li>
-        <%= ticket.description %> <strong>with <%= ticket.timeslot.user.first_name %></strong> at precisely <%= ticket.timeslot.start_time %>
-        <%= link_to 'cancel ticket', ticket_path(ticket), method: :delete, data: {confirm: 'Are you sure you want to cancel this ticket?'}, class: 'btn btn-sm btn-dark' %>
-        <% unless ticket.review %>
-          <%= link_to 'add review', new_ticket_review_path(ticket), class: 'btn btn-sm btn-light' %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+    <% unless @student_tickets.first.nil? %>
+      <div class="card-title px-2">
+        <h2 class="name-bold">Tickets as a student</h2>
+      </div>
+      <div class="d-flex flex-wrap text-center justify-content-around">
+        <% @student_tickets.each do |ticket| %>
+          <div class="teacher-card my-2 mx-1 border">
+            <div class="student-card-color-background">
+               <%= link_to 'cancel ticket', ticket_path(ticket),
+                  method: :delete, data: {confirm: 'Are you sure you want to cancel this ticket?'},
+                  class: 'btn btn-dark btn-sm cancel-btn mt-4' %>
+              <div class="card-img">
+                <%= link_to (user_path(ticket.user)) do %>
+                      <% if ticket.timeslot.user.photo.attached? %>
+                        <%= cl_image_tag ticket.timeslot.user.photo.key, crop: :fill, class: "avatar-large my-1 card-img-top" %>
+                      <% else %>
+                        <%= image_tag "https://instastatistics.com/images/default_avatar.jpg", class: "avatar-square my-1 card-img-top" %>
+                      <% end %>
+                    <% end %>
+              </div>
+          </div>
+          <p class="name-bold"> <%= ticket.timeslot.user.first_name %> </p>
 
-<% unless @teacher_tickets.first.nil? %>
-  <h2>Tickets as a teacher</h2>
-  <ul>
-    <% @teacher_tickets.each do |ticket| %>
-      <li>
-        <%= ticket.description %> <strong>with <%= ticket.user.first_name %></strong> at precisely <%= ticket.timeslot.start_time %>
-        <%= link_to 'cancel ticket', ticket_path(ticket), method: :delete, data: {confirm: 'Are you sure you want to cancel this ticket?'}, class: 'btn btn-sm btn-dark' %>
-      </li>
+          <div class="card-description-student ">
+            <p> <%= ticket.description %></p>
+            <p class="name-bold"> <%= ticket.timeslot.start_time.strftime("%A, %d %B %Y")%></p>
+            <p class="card-ticket-time name-bold"> <%= ticket.timeslot.start_time.strftime("%H:%M")%></p>
+            <% unless ticket.review %>
+              <%= link_to 'add review', new_ticket_review_path(ticket), class: 'btn btn-sm btn-secondary review-btn' %>
+            <% end %>
+          </div>
+
+              </div>
+            <% end %>
+          </div>
     <% end %>
-  </ul>
-<% end %>
+
+    <hr>
+
+    <% unless @teacher_tickets.first.nil? %>
+        <div class="card-title px-2">
+          <h2 class="name-bold p-3">Tickets as a teacher</h2>
+        </div>
+          <div class="d-flex flex-wrap text-center justify-content-around">
+            <% @teacher_tickets.each do |ticket| %>
+              <div class="teacher-card my-2 mx-1 border">
+                <div class="teacher-card-color-background">
+                <%= link_to 'cancel ticket', ticket_path(ticket),
+                  method: :delete, data: {confirm: 'Are you sure you want to cancel this ticket?'},
+                  class: 'btn btn-dark btn-sm cancel-btn mt-4' %>
+
+                  <div class="card-img">
+                    <%= link_to (user_path(ticket.user)) do %>
+                      <% if ticket.user.photo.attached? %>
+                        <%= cl_image_tag ticket.user.photo.key, crop: :fill, class: "avatar-large my-1 card-img-top" %>
+                      <% else %>
+                        <%= image_tag "https://instastatistics.com/images/default_avatar.jpg", class: "avatar-square my-1 card-img-top" %>
+                      <% end %>
+                    <% end %>
+
+                  </div>
+                </div>
+                  <p class="name-bold"> <%= ticket.user.first_name %> </p>
+
+                <div class="card-description">
+                  <p> <%= ticket.description %></p>
+                  <p class="name-bold"> <%= ticket.timeslot.start_time.strftime("%A, %d %B %Y")%></p>
+                  <p class="card-ticket-time name-bold"> <%= ticket.timeslot.start_time.strftime("%H:%M")%></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+    <% end %>
+</div>
