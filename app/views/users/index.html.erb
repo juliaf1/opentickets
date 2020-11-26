@@ -1,8 +1,14 @@
 <br>
 <br>
 <br>
-<h3><%= @skill1 %></h3>
-<h3><%= @search_skill %></h3>
+
+
+<div>
+  <%= simple_form_for User.new, url: users_path, method: 'get' do |f| %>
+    <%= f.association :skills, input_html: {class:'multiple-select form-control'}, include_hidden: false %>
+    <%= f.button :submit, 'submit', class: 'btn btn-primary' %>
+  <% end %>
+</div>
 
 <div class="container">
   <div class="form-wrapper" style="width: 400px; margin: 0 auto;">
@@ -15,19 +21,6 @@
     <% end %>
   </div>
 </div>
-<%= form_tag users_path, method: :get do %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-    placeholder: "Find a teacher"
-  %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
-<% end %>
-
-<h1><% @teach.each do |teacher| %>
-  <% teacher.last_name %>
-<% end %>
-</h1>
 
 <% unless @filtered_teachers.empty? %>
   <h4>Filtered Teachers</h4>

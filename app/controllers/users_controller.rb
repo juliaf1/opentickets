@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update]
 
-  def index
+  def index  
     @users = User.all
     authorize @users
-    dates = params[:beginning].to_s.split('to')
-    dates.map { |date| DateTime.parse(date) }
-    filtered_timeslots = Timeslot.where('start_time BETWEEN ? AND ?', dates.first, dates.last )
+    parse_date_range
+    filtered_timeslots = Timeslot.where('start_time BETWEEN ? AND ?', @dates.first, @dates.last )
     available_filtered_timeslots = filtered_timeslots.reject do |timeslot|
       timeslot.ticket
     end
@@ -14,19 +13,34 @@ class UsersController < ApplicationController
       timeslot.user
     end.uniq
 
- 
+    
 
-    # @search_skill = Skill.find_by(name: params[:skill])
+    if params[:user] && params[:user][:skill_ids]
+      @skills = params[:user][:skill_ids].map do |skill_id|
+        Skill.find(skill_id)
+      end
+    end
+    
+    if @skills
+      @filtered_by_skills = @users.select do |teacher|
+        teacher.user_skills.any? do |user_skill|
+          @skills.include?("#{user_skill.skill.name}")
+        end
+      end
+    end
+    
+    # @fil_by_skill = @filtered_teachers.select! do |teacher|
+      # teacher.user_skills.any? do |user_skill|
+       # @skills.include?(user_skill.skill.name)
+      # end
+    # end
     
     # @filtered_teachers.select! do |teacher|
       #teacher.user_skills.any? do |user_skill|
       #  user_skill.skill == @search_skill
       #end
     # end
-    
-    # @skill1 = User.find(6).user_skills.any? do |user_skill|
-      # user_skill.skill == Skill.find(7)
-    # end
+
   end
 
   def show
@@ -60,5 +74,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :bio, :photo, :hourly_rate)
+  end
+
+  def parse_date_range
+    @dates = params[:beginning].to_s.split('to')
+    @dates.map { |date| DateTime.parse(date) }
   end
 end

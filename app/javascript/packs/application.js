@@ -43,4 +43,3 @@ document.addEventListener('turbolinks:load', () => {
   }
 });
 
-
