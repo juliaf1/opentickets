@@ -36,6 +36,9 @@ gem 'simple_form'
 # Devise for authentication
 gem 'devise'
 
+# Pundit gem for Authorization
+gem 'pundit'
+
 # Added Faker for Seeds
 gem 'faker'
 
