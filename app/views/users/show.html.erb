@@ -52,32 +52,35 @@
          <% end %>
        </h3>
      </div>
+    
      <div class="card-description timeslot">
        <ul>
-          <% @user.timeslots.each do |timeslot| %>
-            <li class="d-flex">
-              <% if timeslot.ticket %>
+        <% @user.timeslots.each do |timeslot| %>
+          <li class="d-flex">
+            <% if timeslot.ticket %>
               <h6 class="disabled">
                 <%= timeslot.start_time.strftime("%A, %d %B %Y, %H:%M") %>
               </h6>
-              <% else %>
+            <% else %>
               <h6 class="active">
                 <%= timeslot.start_time.strftime("%A, %d %B %Y, %H:%M") %>
               </h6>
+            <% end %>
+            
+            <% if policy(@user).destroy? %>
+              <%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %>
+            <% end %>
+            
+            <% unless timeslot.ticket%>
+              <% if current_user != @user %>
+                <%= link_to 'book this slot', new_timeslot_ticket_path(timeslot), class: 'btn btn-sm btn-dark' %>
               <% end %>
-              <% if policy(@user).destroy? %>
-                <%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %>
-              <% end %>
-              <% unless timeslot.ticket%>
-                <% if current_user != @user %>
-                  <%= link_to 'book this slot', new_timeslot_ticket_path(timeslot), class: 'btn btn-sm btn-dark' %>
-                <% end %>
-               <% end %>
-             </li>
-         <% end %>
+            <% end %>
+          </li>
+        <% end %>
        </ul>
      </div>
-   </div>
+  </div>
 
   <% if @user.reviews %>
     <div class="reviews">
