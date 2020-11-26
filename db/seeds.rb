@@ -20,7 +20,6 @@ matheus = {
   last_name: 'Penchel',
   email: 'mcpenchel@lewagon.com',
   password: '123456',
-  hourly_rate: 100,
   city: 'Rio de Janeiro',
   bio: 'The Godfather of Le Wagon Rio, master of the Mastadon and King of the Shrubbles. I can teach you almost anything you need to know.'
   }
@@ -31,7 +30,6 @@ ciro = {
   last_name: 'Lima',
   email: 'ciro@lewagon.com',
   password: '123456',
-  hourly_rate: 50,
   city: 'Cabo Frio',
   bio: 'Master of APIs. I can help you with any problem you have!'
   }
@@ -42,7 +40,6 @@ tatchi = {
   last_name: 'Wiggers',
   email: 'twiggers@lewagon.com',
   password: '123456',
-  hourly_rate: 50,
   city: 'São Paulo',
   bio: "Queen of JavaScript, master of the wiggers. I have the coolest hair in Le Wagon and there's nothing you can do about it."
   }
@@ -53,7 +50,6 @@ pedro = {
   last_name: 'Miranda',
   email: 'pedro@lewagon.com',
   password: '123456',
-  hourly_rate: 5,
   city: 'Salvador',
   bio: "Quero jogar futebol contigo."
   }
@@ -64,7 +60,6 @@ milene = {
   last_name: 'Cardoso',
   email: 'milene@lewagon.com',
   password: '123456',
-  hourly_rate: 1,
   city: 'Rio de Janeiro',
   bio: "I have a 5 year plan for me and for all of you. Let's Marie Kondo your life to be super productive!"
   }
@@ -75,7 +70,6 @@ marcel = {
   last_name: 'Fonseca',
   email: 'marcel@lewagon.com',
   password: '123456',
-  hourly_rate: 10,
   city: 'London',
   bio: "Learn some really cool stuff with me and my crazy cats. I love to code and I love to teach!"
   }
