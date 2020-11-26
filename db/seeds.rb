@@ -191,7 +191,7 @@ cynthia.photo.attach(io: cynthia_avatar, filename: 'cynthia.jpeg', content_type:
 
 puts '*** Creating Teacher Timeslots ***'
 
-teachers = User.all.select { |user| user.hourly_rate }
+teachers = User.first(6)
 
 teachers.each do |teacher|
   10.times do
@@ -204,7 +204,7 @@ puts "**** #{Timeslot.count} Timeslots Created ***"
 
 puts '*** Creating Tickets ***'
 
-students = User.all.reject { |user| user.hourly_rate }
+students = User.all.reject { |user| user.timeslots.empty? }
 available_timeslots = Timeslot.all
 
 students.each do |student|
