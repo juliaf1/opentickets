@@ -204,7 +204,7 @@ puts "**** #{Timeslot.count} Timeslots Created ***"
 
 puts '*** Creating Tickets ***'
 
-students = User.all.reject { |user| user.timeslots.empty? }
+students = User.all.select { |user| user.timeslots.empty? }
 available_timeslots = Timeslot.all
 
 students.each do |student|
