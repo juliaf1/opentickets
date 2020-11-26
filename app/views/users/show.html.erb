@@ -20,13 +20,10 @@
 
     <p class="card-description">
       <ul>
-        <% if @user.bio %>
+        <% if @user.bio.present? %>
           <li> <%= @user.bio %></li>
         <% end %>
         <li> <%= @user.email %> </li>
-        <% if @user.hourly_rate %>
-          <li> <%= @user.hourly_rate %>$ per hour</li>
-        <% end %>
       </ul>
     </p>
 
