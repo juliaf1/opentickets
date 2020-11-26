@@ -2,6 +2,7 @@
 <br>
 <br>
 <h3><%= @skill1 %></h3>
+<h3><%= @search_skill %></h3>
 
 <div class="container">
   <div class="form-wrapper" style="width: 400px; margin: 0 auto;">
@@ -13,6 +14,14 @@
       <%= submit_tag ("Submit") %>
     <% end %>
   </div>
+</div>
+<div>
+  <%= simple_form_for :search, method: "get" do |f| %>
+
+    <%= f.input :skills, input_html: {name: 'skill', class:'multiple-select form-control'}, include_hidden: false %>
+
+    <%= f.button :submit, 'Add skill', class: 'btn btn-primary' %>
+  <% end %>
 </div>
 
 <% unless @filtered_teachers.empty? %>

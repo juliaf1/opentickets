@@ -13,11 +13,13 @@ class UsersController < ApplicationController
     @filtered_teachers = available_filtered_timeslots.map do |timeslot|
       timeslot.user
     end.uniq
+
+    # @search_skill = Skill.find_by(name: params[:skill])
     
     # @filtered_teachers.select! do |teacher|
-      # teacher.user_skills.any? do |user_skill|
-        # user_skill.skill == Skill.find(7)
-      # end
+      #teacher.user_skills.any? do |user_skill|
+      #  user_skill.skill == @search_skill
+      #end
     # end
     
     # @skill1 = User.find(6).user_skills.any? do |user_skill|
