@@ -1,11 +1,14 @@
 .footer {
+  // position: absolute;
+  // bottom: 0;
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 80px;
-  padding: 0px 40px;
+  padding: 30px 40px 0px 40px;
   color: $black;
+  list-style-type: none;
 }
 .footer-links {
   display: flex;
@@ -19,4 +22,8 @@
 }
 .footer-links a:hover {
   color: $gray;
+}
+
+.footer-copyright {
+
 }
