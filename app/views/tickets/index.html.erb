@@ -14,7 +14,7 @@
                   method: :delete, data: {confirm: 'Are you sure you want to cancel this ticket?'},
                   class: 'btn btn-dark btn-sm cancel-btn mt-4' %>
               <div class="card-img">
-                <%= link_to (user_path(ticket.user)) do %>
+                <%= link_to (user_path(ticket.timeslot.user)) do %>
                   <% if ticket.timeslot.user.photo.attached? %>
                     <%= cl_image_tag ticket.timeslot.user.photo.key, crop: :fill, class: "avatar-large my-1 card-img-top" %>
                   <% else %>
