@@ -1,13 +1,17 @@
-<div class="container my-5">
-  <br>
-  <br>
-  <br>
-  <br>
-  <%= simple_form_for @review, url: ticket_reviews_path(@ticket), method: 'post' do |f| %>
+<div class="container text-center my-5">
+  <div class="row">
+    <div class="col-sm">
+      <h1>Review your teacher</h1>
+      <p class="mb-5">Write your review and then choose a rating!</p>
+      <%= simple_form_for @review, url: ticket_reviews_path(@ticket), method: 'post' do |f| %>
 
-    <%= f.input :content %>
-    <%= f.input :rating %>
+        <%= f.input :content, input_html: {class: 'input-box-width'} %>
+        <%= f.input :rating, input_html: {class: 'input-box-width'} %>
 
-    <%= f.button :submit, 'Add Review', class: 'btn btn-primary' %>
-  <% end %>
+        <%= f.button :submit, 'Add Review', class: 'btn-skill' %>
+      <% end %>
+      </div>
+  </div>
 </div>
+
+<div style="height: 500px"></div>
