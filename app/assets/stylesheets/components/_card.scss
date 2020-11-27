@@ -65,8 +65,13 @@
     bottom: -145px;
     color: white;
     text-decoration: none;
+    z-index: 900;
   }
 }
 .teacher-browse-title {
   text-align: center;
+}
+
+.card-bg-white {
+  background-color: white;
 }
