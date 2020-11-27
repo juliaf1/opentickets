@@ -38,6 +38,13 @@
           </div>
         <% end %>
       </div>
+
+    <% else %>
+      <div class="card-title mb-5 px-2">
+        <h2 class="name-bold">Tickets as a student</h2>
+        <p>Ops, you don't have any tickets booked.</p>
+        <%= link_to 'Browse our teachers to book a ticket', users_path %>
+      </div>
     <% end %>
 
     <hr>
@@ -76,6 +83,13 @@
 
           </div>
         <% end %>
+      </div>
+
+    <% else %>
+      <div class="card-title mt-5 px-2">
+        <h2 class="name-bold">Tickets as a Teacher</h2>
+        <p>Looks like you're not teaching anyone yet.</p>
+        <%= link_to 'Add your available timeslots so people can book you', new_timeslot_path %>
       </div>
     <% end %>
 
