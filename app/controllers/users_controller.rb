@@ -1,16 +1,16 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update]
 
-  def index
+  def index  
     @users = User.all
     authorize @users
-
-    filtered_timeslots = Timeslot.where('start_time BETWEEN ? AND ?', params[:beginning], params[:end])
-
+    
+    parse_date_range
+    filtered_timeslots = Timeslot.where('start_time BETWEEN ? AND ?', @dates.first, @dates.last)
+    
     available_filtered_timeslots = filtered_timeslots.reject do |timeslot|
       timeslot.ticket
     end
-
     @filtered_teachers = available_filtered_timeslots.map do |timeslot|
       timeslot.user
     end.uniq
@@ -58,5 +58,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :bio, :photo, :city)
+  end
+
+  def parse_date_range
+    @dates = params[:beginning].to_s.split('to')
+    @dates.map { |date| DateTime.parse(date) }
   end
 end
