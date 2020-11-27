@@ -18,7 +18,7 @@
                   <% if ticket.timeslot.user.photo.attached? %>
                     <%= cl_image_tag ticket.timeslot.user.photo.key, crop: :fill, class: "avatar-large my-1 card-img-top" %>
                   <% else %>
-                    <%= image_tag "https://instastatistics.com/images/default_avatar.jpg", class: "avatar-square my-1 card-img-top" %>
+                    <%= image_tag "https://instastatistics.com/images/default_avatar.jpg", class: "avatar-large my-1 card-img-top" %>
                   <% end %>
                 <% end %>
               </div>
