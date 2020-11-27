@@ -10,3 +10,17 @@ ul {
 .skill-btn {
   margin: 0;
 }
+
+.container {
+  position: relative;
+  border: solid 2px;
+}
+
+.contents-top {
+  position: absolute;
+  top: 50px;
+}
+
+.container-margin-top {
+  margin-top: 150px;
+}
