@@ -7,7 +7,13 @@
 @import "button";
 @import "footer";
 @import "card";
+@import "container";
+@import "select2";
 
 .disabled {
   opacity: 0.6;
+}
+
+.name-bold {
+  font-weight: 900;
 }

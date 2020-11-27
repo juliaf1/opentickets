@@ -1,11 +1,5 @@
-.cards-container {
-  list-style: none;
-  display: flex;
-  justify-content: space-around;
-}
-.card-user {
-  width: 300px;
-}
+// Users Cards
+
 .color-box {
   border-radius: 10px 10px 0 0;
   width: 100%;
@@ -15,13 +9,8 @@
   object-fit: cover;
   position: absolute;
 }
-.teacher-card-color-background {
-  border-radius: 10px 10px 0 0;
-  height: 35%;
-  width: 100%;
-  background-color: $orange;
-  margin-bottom: 70px;
-}
+
+
 .card-teacher-index {
   width: 500px;
   height: 300px;
@@ -30,6 +19,7 @@
   box-shadow: 1px 1px 4px rgba(20, 20, 20, 0.1);
   transition: ease 0.2s;
   position: relative;
+
   h1 {
     font-size: 24px;
     color: white;
@@ -38,6 +28,7 @@
     top: 35px;
     z-index: 150;
   }
+
   .teacher-info {
     position: absolute;
     right: 20px;
@@ -45,6 +36,7 @@
     width: 55%;
     z-index: 150;
   }
+
   .teacher-skills {
     position: absolute;
     bottom: 15px;
@@ -53,12 +45,14 @@
     display: flex;
     justify-content: space-around;
   }
+
   &:hover {
     box-shadow: 1px 1px 8px rgba(20, 20, 20, 0.2);
     .avatar-teacher {
       width: 122px;
     }
   }
+
   .learn-btn {
     position: absolute;
     right: 28px;
@@ -68,10 +62,62 @@
     z-index: 900;
   }
 }
+
 .teacher-browse-title {
   text-align: center;
 }
 
 .card-bg-white {
   background-color: white;
+}
+
+// Tickets Cards
+
+.cards-container {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-user {
+  width: 300px;
+}
+
+.teacher-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px rgba(20, 20, 20, 0.1);
+  transition: ease 0.2s;
+  min-height: 380px;
+  width:25%;
+  .card-img {
+    margin-top: 35px;
+  }
+  &:hover {
+    box-shadow: 1px 1px 8px rgba(20, 20, 20, 0.2);
+    .avatar-large {
+      width: 100px;
+    }
+  }
+}
+
+.teacher-card-color-background {
+  border-radius: 10px 10px 0 0;
+  height: 35%;
+  width: 100%;
+  background-color: $orange;
+  margin-bottom: 70px;
+}
+
+.card-ticket-time {
+  color: $blue;
+  padding-top: 0;
+}
+
+.student-card-color-background {
+  border-radius: 10px 10px 0 0;
+  height: 35%;
+  width: 100%;
+  background-color: $green;
+  margin-bottom: 55px;
 }

@@ -10,3 +10,44 @@
   font-size: 14px;
   margin: 4px;
 }
+
+.cancel-btn {
+  margin-top: 10px;
+  margin-bottom: 0;
+  border-radius: 50px;
+}
+
+.review-btn {
+  border-radius: 50px;
+  margin-top: 0;
+}
+
+.btn-skip {
+  padding: 10px 30px;
+  border-radius: 4px;
+  color: $blue;
+  border: 1px solid $blue;
+  letter-spacing: 1px;
+  font-size: 16px;
+}
+
+.btn-skill {
+  padding: 10px 15px;
+  border-radius: 4px;
+  color: $white;
+  background-color: $blue;
+  letter-spacing: 1px;
+  font-size: 16px;
+  margin-right: 10px;
+
+  &:hover {
+    text-decoration: underline;
+    color: $white;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
