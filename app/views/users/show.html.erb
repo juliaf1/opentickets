@@ -1,83 +1,97 @@
-<div class="container my-5 p-5 card w-50">
+<div class="container px-5 py-3 card w-50 profile-card">
+
   <% if @user.photo.attached? %>
-    <%= cl_image_tag @user.photo.key, crop: :fill, class: "avatar-square my-1 card-img-top" %>
+    <%= cl_image_tag @user.photo.key, crop: :fill, class: "avatar-lg-round my-1 mt-4 card-img-top" %>
   <% else %>
-    <%= image_tag "https://instastatistics.com/images/default_avatar.jpg", class: "avatar-square my-1 card-img-top" %>
+    <%= image_tag "https://instastatistics.com/images/default_avatar.jpg", class: "avatar-lg-round my-1 mt-4 card-img-top" %>
   <% end %>
 
-  <% if policy(@user).edit? %>
-    <%= link_to 'Edit profile', edit_user_path, class: 'btn btn-primary' %>
-    <%= link_to 'Edit settings', edit_user_registration_path, class: 'btn btn-primary' %>
-  <% end %>
-
-  <div class="card p-3">
-    <div class="card-title">
-      <h2><%= @user.first_name %> <%= @user.last_name %></h2>
-
-      <div class="card-tag">
-        <ul class="list-skills">
-          <li>
-            <% @user_skills.each do |user_skill| %>
-              <%=user_skill.skill.name %>
-              <% if policy(@user).destroy? %>
-                <%= link_to 'X', user_skill_path(user_skill), method: 'delete'%>
-              <% end %>
-            <% end %>
-            <% if policy(@user).destroy? %>
-              <%= link_to '+', new_user_skill_path, class: 'btn btn-primary' %>
-            <% end %>
-          </li>
-        </ul>
-
-        <p class="card-description">
-          <ul>
-            <% if @user.bio.present? %>
-              <li> <%= @user.bio %></li>
-            <% end %>
-            <li> <%= @user.email %> </li>
-          </ul>
-        </p>
-      </div>
-
-    </div>
+  <div class="my-4 edit-buttons">
+    <% if policy(@user).edit? %>
+      <%= link_to 'Edit profile', edit_user_path, class: 'btn-edit mr-2' %>
+      <%= link_to 'Edit settings', edit_user_registration_path, class: 'btn-edit' %>
+    <% end %>
   </div>
 
-  <div class="card-user-timeslots">
-     <div class="card-title">
-       <h3>Timeslots
-         <% if policy(@user).edit? %>
-           <%= link_to 'Add a timeslot', new_timeslot_path, class: 'btn btn-outline-primary' %>
-         <% end %>
-       </h3>
-     </div>
+  <h2 class="profile-name"><%= @user.first_name %> <%= @user.last_name %></h2>
 
-     <div class="card-description timeslot">
-       <ul>
-        <% @user.timeslots.each do |timeslot| %>
-          <li class="d-flex">
-            <% if timeslot.ticket %>
-              <h6 class="disabled">
-                <%= timeslot.start_time.strftime("%A, %d %B %Y, %H:%M") %>
-              </h6>
-            <% else %>
-              <h6 class="active">
-                <%= timeslot.start_time.strftime("%A, %d %B %Y, %H:%M") %>
-              </h6>
-            <% end %>
+  <div class="profile-skills-container">
+    <ul class="list-skills">
+      <% @user_skills.each do |user_skill| %>
+        <li class="profile-btn-skill">
+          <%= user_skill.skill.name %>
 
-            <% if policy(@user).destroy? %>
-              <%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %>
-            <% end %>
+          <% if policy(@user).destroy? %>
+              <span class="badge badge-light ml-1"> <%= link_to 'X', user_skill_path(user_skill), method: 'delete'%> </span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
 
-            <% unless timeslot.ticket%>
-              <% if current_user != @user %>
-                <%= link_to 'book this slot', new_timeslot_ticket_path(timeslot), class: 'btn btn-sm btn-dark' %>
+    <% if policy(@user).edit? %>
+      <div><%= link_to '+', new_user_skill_path, class: 'skill-add-btn' %></div>
+    <% end %>
+  </div>
+
+  <div class="profile-bio">
+    <% if @user.bio.present? %>
+      <p><%= @user.bio %></p>
+      <p class="profile-email"><%= @user.email %></p>
+    <% end %>
+  </div>
+
+  <div class="card-user-timeslots mt-3">
+    <div class="profile-timeslot-title">
+      <h3 class="mr-2">Timeslots</h3>
+      <% if policy(@user).edit? %>
+         <%= link_to 'Add a timeslot', new_timeslot_path, class: 'btn-add-timeslots' %>
+      <% end %>
+    </div>
+
+    <div class="profile-timeslots-container">
+      <% if @user.timeslots.present? %>
+
+        <div class="list-timeslots">
+          <% @user.timeslots.each do |timeslot| %>
+
+            <div class="timeslot-element">
+              <% if timeslot.ticket %>
+                <p class="closed-timeslot">
+                  <%= timeslot.start_time.strftime("%A, %d %B %Y, %H:%M") %>
+                </p>
+              <% else %>
+                <p class="open-timeslot">
+                  <%= timeslot.start_time.strftime("%A, %d %B %Y, %H:%M") %>
+                </p>
               <% end %>
-            <% end %>
-          </li>
-        <% end %>
-       </ul>
-     </div>
+
+              <% if policy(@user).destroy? %>
+                <%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %>
+              <% end %>
+
+              <% unless timeslot.ticket%>
+                <% if current_user != @user %>
+                  <%= link_to 'Book this slot', new_timeslot_ticket_path(timeslot), class: 'btn-book' %>
+                <% end %>
+              <% end %>
+            </div>
+
+          <% end %>
+        </div>
+
+      <% else %>
+        <p>Oops, looks like you don't have any timeslots yet.</p>
+      <% end %>
+
+    </div>
+
+    <% if @user.city %>
+      <div id="map"
+      style="width: 100%; height: 600px;"
+      data-marker="<%= @mark.to_json %>"
+      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+    <% end %>
   </div>
 
   <% if @user.reviews %>
@@ -90,14 +104,6 @@
           </li>
         <% end %>
       </ul>
-    </div>
-  <% end %>
-
-  <% if @user.city %>
-    <div id="map"
-      style="width: 100%; height: 600px;"
-      data-marker="<%= @mark.to_json %>"
-      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
   <% end %>
 </div>
