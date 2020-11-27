@@ -13,7 +13,7 @@
   <div class="card p-3">
     <div class="card-title">
       <h2><%= @user.first_name %> <%= @user.last_name %></h2>
-      
+
       <div class="card-tag">
         <ul class="list-skills">
           <li>
@@ -38,7 +38,7 @@
           </ul>
         </p>
       </div>
-    
+
     </div>
   </div>
 
@@ -50,7 +50,7 @@
          <% end %>
        </h3>
      </div>
-    
+
      <div class="card-description timeslot">
        <ul>
         <% @user.timeslots.each do |timeslot| %>
@@ -64,11 +64,11 @@
                 <%= timeslot.start_time.strftime("%A, %d %B %Y, %H:%M") %>
               </h6>
             <% end %>
-            
+
             <% if policy(@user).destroy? %>
               <%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %>
             <% end %>
-            
+
             <% unless timeslot.ticket%>
               <% if current_user != @user %>
                 <%= link_to 'book this slot', new_timeslot_ticket_path(timeslot), class: 'btn btn-sm btn-dark' %>

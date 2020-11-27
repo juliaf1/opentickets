@@ -3,6 +3,46 @@
   display: flex;
   justify-content: space-around;
 }
+
 .card-user {
   width: 300px;
+}
+
+.teacher-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px rgba(20, 20, 20, 0.1);
+  transition: ease 0.2s;
+  min-height: 380px;
+  width:25%;
+  .card-img {
+    margin-top: 35px;
+  }
+  &:hover {
+    box-shadow: 1px 1px 8px rgba(20, 20, 20, 0.2);
+    .avatar-large {
+      width: 100px;
+    }
+  }
+}
+
+.teacher-card-color-background {
+  border-radius: 10px 10px 0 0;
+  height: 35%;
+  width: 100%;
+  background-color: $orange;
+  margin-bottom: 70px;
+}
+
+.card-ticket-time {
+  color: $blue;
+  padding-top: 0;
+}
+
+.student-card-color-background {
+  border-radius: 10px 10px 0 0;
+  height: 35%;
+  width: 100%;
+  background-color: $green;
+  margin-bottom: 55px;
 }
