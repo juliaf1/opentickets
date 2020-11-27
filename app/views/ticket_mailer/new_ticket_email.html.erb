@@ -1,0 +1,46 @@
+<html>
+
+  <body>
+
+    <div style="border: 1px grey; text-align: center;">
+
+      <h3 style="font-weight: bold; color: black; font-size: 25px;">Hey, <%=  @ticket.timeslot.user.first_name %>!</h3>
+      <p style="color: black; font-size: 15px;"> <%= @ticket.user.first_name %> just booked you for a ticket.
+       Contact them at <%= @ticket.user.email %> so you can set up the details of your meeting.
+        Happy coding!</p>
+
+
+      <div style="width: 100%; display:flex; justify-content: center; text-align: center; ">
+        <div  style="background-color: white; border-radius: 10px;
+        border: 1px solid grey; min-height: 200px;  width:35%; padding: 5px; margin: 0 auto;" >
+          <div  style="border-radius: 10px 10px 0 0;  height: 35%;
+          width: 100%; background-color: $green; margin-bottom: 15px;" >
+            <%= link_to 'cancel ticket', ticket_url(@ticket),
+              method: :delete, data: {confirm: 'Are you sure you want to cancel this ticket?'},
+               style: "margin-top: 10px; margin-bottom: 0; border-radius: 50px; color:white; background-color: grey; padding: 5px;" %>
+              <div style="margin-top: 35px; margin-bottom: 15px;">
+                <%= link_to (user_url(@ticket.user)) do %>
+                  <% if @ticket.user.photo.attached? %>
+                        <%= cl_image_tag @ticket.user.photo.key, crop: :fill, style: "border: 2px solid white; width: 96px; border-radius: 50%; margin-bottom: 10px;" %>
+                  <% else %>
+                        <%= image_tag "https://instastatistics.com/images/default_avatar.jpg", style: "border: 2px solid white; width: 96px; border-radius: 50%;"%>
+                  <% end %>
+                <% end %>
+               </div>
+          </div>
+
+           <p style="font-weight: bold; padding: 10px; font-size: 15px;"> <%= @ticket.user.first_name %> </p>
+            <div >
+              <p> <%= @ticket.description %></p>
+              <p style="font-weight: bold; font-size: 12px;"> <%= @ticket.timeslot.start_time.strftime("%A, %d %B %Y")%></p>
+              <p style="font-weight: bold; color: $blue;font-size: 12px; padding-top: 0;">
+                <%= @ticket.timeslot.start_time.strftime("%H:%M")%>
+              </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

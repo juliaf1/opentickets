@@ -1,0 +1,16 @@
+
+
+You have a new Ticket from <%= @ticket.user.first_name %>
+
+Details:
+----------------------
+
+Student: <%= @ticket.user.first_name %>
+
+Date: <%= @ticket.timeslot.start_time.strftime("%A, %d %B %Y")%>
+
+Time: <%= @ticket.timeslot.start_time.strftime("%H:%M")%>
+
+
+Description:
+<%= @ticket.description %>
