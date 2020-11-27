@@ -24,9 +24,9 @@
 
 <div class="cards-container d-flex flex-wrap w-100">
   <% @teachers.reject { |user| user.timeslots.empty? }.each do |user| %>
-    <div class="card d-flex my-3 mx-2">
+    <div class="card">
 
-      <div class="card-teacher-index my-1">
+      <div class="card-teacher-index d-flex my-3 mx-2">
         
 
         <div class="color-box">
@@ -35,7 +35,11 @@
           </div>
 
           <div class="teacher-info">
-            <p><%= user.bio %></p>
+            <% if user.bio.length > 120 %>
+            <p><%= user.bio[0..120] %>...</p>
+            <% else %>
+              <p><%= user.bio %></p>
+            <% end %>
           </div>
 
           <% if user.photo.attached? %>
