@@ -13,21 +13,24 @@
   <div class="card p-3">
     <div class="card-title">
       <h2><%= @user.first_name %> <%= @user.last_name %></h2>
-      
+
       <div class="card-tag">
         <ul class="list-skills">
           <li>
             <% @user_skills.each do |user_skill| %>
-              <%=user_skill.skill.name %>
-              <% if policy(@user).destroy? %>
-                <%= link_to 'X', user_skill_path(user_skill), method: 'delete'%>
-              <% end %>
+              <h6 class="btn btn-primary skill-btn"><%=user_skill.skill.name %>
+                <% if policy(@user).destroy? %>
+                  <span class="badge badge-light"> <%= link_to 'X', user_skill_path(user_skill), method: 'delete'%> </span>
+                <% end %>
+              </h6>
             <% end %>
             <% if policy(@user).destroy? %>
-              <%= link_to '+', new_user_skill_path, class: 'btn btn-primary' %>
+              <%= link_to '+', new_user_skill_path, class: 'btn btn-primary skill-add-btn' %>
             <% end %>
           </li>
         </ul>
+
+
 
         <p class="card-description">
           <ul>
@@ -38,11 +41,11 @@
           </ul>
         </p>
       </div>
-    
+
     </div>
   </div>
 
-  <div class="card-user-timeslots">
+  <div class="card-user-timeslots mt-3">
      <div class="card-title">
        <h3>Timeslots
          <% if policy(@user).edit? %>
@@ -50,31 +53,31 @@
          <% end %>
        </h3>
      </div>
-    
+
      <div class="card-description timeslot">
        <ul>
         <% @user.timeslots.each do |timeslot| %>
-          <li class="d-flex">
+          <div class="d-flex">
             <% if timeslot.ticket %>
-              <h6 class="disabled">
+              <h6 class="disabled card-header card-body mb-2">
                 <%= timeslot.start_time.strftime("%A, %d %B %Y, %H:%M") %>
               </h6>
             <% else %>
-              <h6 class="active">
+              <h6 class="active card-header card-body mb-2">
                 <%= timeslot.start_time.strftime("%A, %d %B %Y, %H:%M") %>
               </h6>
             <% end %>
-            
+
             <% if policy(@user).destroy? %>
-              <%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %>
+              <a href="#" class="mt-0 mr-0 mb-0 ml-4"> <%= link_to icon('fas', 'trash-alt'), timeslot_path(timeslot), method: :delete %> </a>
             <% end %>
-            
+
             <% unless timeslot.ticket%>
               <% if current_user != @user %>
                 <%= link_to 'book this slot', new_timeslot_ticket_path(timeslot), class: 'btn btn-sm btn-dark' %>
               <% end %>
             <% end %>
-          </li>
+          </div>
         <% end %>
        </ul>
      </div>
