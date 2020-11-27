@@ -2,15 +2,6 @@
   margin-top: 5px;
 }
 
-.skill-tag {
-  padding: 6px 8px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  background-color: #4CA67C;
-  font-size: 14px;
-  margin: 4px;
-}
-
 .cancel-btn {
   margin-top: 10px;
   margin-bottom: 0;
@@ -31,7 +22,7 @@
   font-size: 16px;
 }
 
-.btn-skill {
+.btn-skill, .btn-filter {
   padding: 10px 15px;
   border-radius: 4px;
   color: $white;

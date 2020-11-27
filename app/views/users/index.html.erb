@@ -1,64 +1,59 @@
+<div class="card-bg-white my-3">
 
-<div class="card-bg-white">
-<br>
-<br>
-<br>
-  <div class="container card-bg-white">
+  <div class="container card-bg-white my-5">
     <div class="form-wrapper" style="width: 250px; margin: 50px auto;">
-      <h4>Filter by time period</h4>
+      <h4 class="mb-3">Filter by time period</h4>
 
       <%= simple_form_for :search, method: "get" do |f| %>
-        <%= f.input :beginning, as: :string, input_html: {id: "range_start",  name: 'beginning' } %>
+        <%= f.input :beginning, as: :string, input_html: {id: "range_start", name: 'beginning' } %>
         <%= f.input :end, as: :string, input_html: {id: "range_end",  name: 'end' } %>
-        <%= submit_tag ("Filter"), class: "btn btn-dark btn-lg w-100" %>
+        <%= submit_tag ("Filter"), class: "btn btn-filter mt-2 w-100" %>
       <% end %>
     </div>
   </div>
+
   <hr>
+
   <% if @filtered_teachers.empty? %>
     <% @teachers = @users %>
-    <div class="teacher-browse-title card-bg-white name-bold"><h2>Teachers</h2></div>
+    <div class="teacher-browse-title card-bg-white name-bold mt-4 mb-3"><h2>Teachers</h2></div>
   <% else %>
     <% @teachers = @filtered_teachers %>
-    <div class="teacher-browse-title card-bg-white name-bold"><h2>Teachers</h2></div>
+    <div class="teacher-browse-title card-bg-white name-bold mt-4 mb-3"><h2>Teachers</h2></div>
   <% end %>
 
   <div class="cards-container d-flex flex-wrap w-100 card-bg-white">
     <% @teachers.reject { |user| user.timeslots.empty? }.each do |user| %>
-      <div class="">
+      <div class="card-teacher-index d-flex my-3 mx-2">
+        <div class="color-box">
+          <h1><%= user.first_name %> <%= user.last_name %></h1>
 
-        <div class="card-teacher-index d-flex my-3 mx-2">
-          
-          <div class="color-box">
-            <div>
-              <h1><%= user.first_name %> <%= user.last_name %></h1>
-            </div>
-
-            <div class="teacher-info">
+          <div class="teacher-info">
+            <% if user.bio.present? %>
               <% if user.bio.length > 120 %>
-              <p><%= user.bio[0..120] %>...</p>
+                <p><%= user.bio[0..120] %>...</p>
               <% else %>
                 <p><%= user.bio %></p>
               <% end %>
-            </div>
+            <% end %>
+          </div>
 
+          <%= link_to (user_path(user)), target: "_blank" do %>
             <% if user.photo.attached? %>
               <div><%= cl_image_tag user.photo.key, crop: :fill, class: "avatar-teacher" %></div>
             <% else %>
               <div><%= image_tag "https://instastatistics.com/images/default_avatar.jpg", class: "avatar-teacher" %></div>
             <% end %>
+          <% end %>
 
-            <div class="learn-btn"><p><%= link_to 'learn more', user_path(user) %></p></div>
-          </div>
-
-          <div class="teacher-skills">
-            <% user.skills.each do |skill| %>
-              <div class="skill-tag"><%= skill.name %></div>
-            <% end %>
-          </div>
-
+          <div class="learn-btn"><%= link_to 'learn more', user_path(user), target: "_blank" %></div>
         </div>
 
+        <div class="teacher-skills">
+          <% user.skills.each do |skill| %>
+            <div class="skill-tag"><%= skill.name %></div>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>
