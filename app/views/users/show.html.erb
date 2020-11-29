@@ -27,11 +27,11 @@
         </li>
       <% end %>
 
-      <li class="skill-add-btn">
-        <% if policy(@user).edit? %>
+      <% if policy(@user).edit? %>
+        <li class="skill-add-btn">
           <%= link_to '+', new_user_skill_path, class: 'skill-add-btn' %>
-        <% end %>
-      </li>
+        </li>
+      <% end %>
     </ul>
   </div>
 
